@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Responsive,ButtonCircle } from 'upkit'
 
+import FaUser from "@meronex/icons/fa/FaUser";
+
 import StoreLogo from '../StoreLogo'
 
 function TopBar() {
@@ -18,6 +20,7 @@ function TopBar() {
 					<div className="mr-2 inline-block text-red-600 font-bold">
 						{auth?.user?.full_name}
 					</div>
+					<ButtonCircle icon={<FaUser/>}/>
 				</Link>
 			</div>
 		</Responsive>
