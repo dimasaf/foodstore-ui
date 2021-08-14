@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+
+import store from './app/store';
+
+import { listen } from './app/listener';
+
+import Home from './pages/Home';
+import Register from './pages/Register';
+import RegisterSuccess from './pages/RegisterSuccess';
+
+
+import 'upkit/dist/style.min.css';
 
 function App() {
+
+  React.useEffect(()=>{
+    listen();
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Router>
+        <Switch>
+          <Route path="/register" component={Register}></Route>
+          <Route path="/register/berhasil" component={RegisterSuccess}></Route>
+          <Route path="/" component={Home}></Route>
+        </Switch>
+      </Router>
+    </Provider>
   );
 }
 
