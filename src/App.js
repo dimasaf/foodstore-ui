@@ -9,9 +9,10 @@ import { listen } from './app/listener';
 import Home from './pages/Home';
 import Register from './pages/Register';
 import RegisterSuccess from './pages/RegisterSuccess';
-
+import Login from './pages/Login';
 
 import 'upkit/dist/style.min.css';
+
 
 function App() {
 
@@ -23,8 +24,9 @@ function App() {
     <Provider store={store}>
       <Router>
         <Switch>
-          <Route path="/register" component={Register}></Route>
           <Route path="/register/berhasil" component={RegisterSuccess}></Route>
+          <Route path="/register" component={Register}></Route>
+          <Route path="/login" component={Login}></Route>
           <Route path="/" component={Home}></Route>
         </Switch>
       </Router>

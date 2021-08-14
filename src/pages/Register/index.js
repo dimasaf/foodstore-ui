@@ -8,6 +8,8 @@ import { registerUser } from '../../api/auth'
 
 import {rules} from './validation'
 
+import StoreLogo from '../../component/StoreLogo';
+
 const statuslist ={
 	idle: 'idle',
 	process: 'process',
@@ -53,6 +55,9 @@ function Register() {
 	return (
 		<LayoutOne size="small">
 			<Card color="white">
+				<div className="text-center mb-5">
+					<StoreLogo/>
+				</div>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<FormControl errorMessage={errors.full_name?.message}>
 						<InputText name="full_name" placeholder="Nama Lengkap" fitContainer {...register("full_name", rules.full_name )}/>
