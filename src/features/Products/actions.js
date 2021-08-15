@@ -23,7 +23,7 @@ export const fetchProduct = () => {
 		}
 
 		try{
-			let {data: {data, count}} = await debounceFetchProduct({params});
+			let {data: {data, count}} = await debounceFetchProduct(params);
 			dispatch(successFetchingProduct({data,count}))
 		}catch(err){
 			dispatch(errorFetchingProduct());
@@ -57,28 +57,28 @@ export const setPage = (number = 1) => {
 	}
 }
 
-export const setKeyword = (keyword) => {
+export const setKeyword = keyword => {
 	return{
 		type: SET_KEYWORD,
 		keyword
 	}
 }
 
-export const setCategory = (category) => {
+export const setCategory = category => {
 	return{
 		type: SET_CATEGORY,
 		category
 	}
 }
 
-export const setTags = (tags) => {
+export const setTags = tags => {
 	return{
 		type:SET_TAGS,
 		tags
 	}
 }
 
-export const toggleTag = (tag) => {
+export const toggleTag = tag => {
 	return{
 		type:TOGGLE_TAG,
 		tag
@@ -95,4 +95,9 @@ export const goToPrevPage = () => {
 	return {
 		type: PREV_PAGE,
 	}
+}
+
+
+export const clearTags = () => {
+	return setTags([]);
 }
