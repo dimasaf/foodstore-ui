@@ -4,7 +4,6 @@ const initialState = localStorage.getItem('cart') ? JSON.parse(localStorage.getI
 
 export default function reducer(state = initialState, action){
 		switch(action.type){
-
 		case ADD_ITEM:
 			if(state.find(item => item._id === action.item._id)){
 				return state.map(item => ({...item, qty: item.__id === action.item.__id ? item.qty + 1 : item.qty }))

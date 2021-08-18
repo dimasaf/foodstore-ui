@@ -3,8 +3,9 @@ import { Provider } from 'react-redux';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
 import store from './app/store';
-
 import { listen } from './app/listener';
+import { getCart } from './api/cart';
+
 
 import Home from './pages/Home';
 import Register from './pages/Register';
@@ -18,6 +19,7 @@ function App() {
 
   React.useEffect(()=>{
     listen();
+    getCart();
   }, [])
 
   return (

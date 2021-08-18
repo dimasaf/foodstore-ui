@@ -33,7 +33,6 @@ function Register() {
 			return setError('password_confirmation', {type: 'equality',message: 'Konfirmasi password harus dama dengan password'});
 		}
 
-
 		setStatus(statuslist.process)
 		// tidak dijalankan ketika fungsi diatas gagal, (karna return)
 		let {data} = await registerUser(formData)
@@ -49,7 +48,6 @@ function Register() {
 	setStatus(statuslist.success)
 
 	history.push('/register/berhasil');
-
 	}
 
 	return (
@@ -71,7 +69,7 @@ function Register() {
 					<FormControl errorMessage={errors.password_confirmation?.message}>
 						<InputPassword name="password_confirmation" placeholder="Konfirmasi Password" fitContainer {...register("password_confirmation", rules.password_confirmation)}/>
 					</FormControl>
-					<Button size="large" fitContainer disabled={status === statuslist.process}>{status === statuslist.process ? "Prosses" : "Mendaftar"}</Button>
+					<Button size="large" fitContainer disabled={status === statuslist.process}> {status === statuslist.process ? "Prosses" : "Mendaftar"}</Button>
 				</form>
 				<div className="text-center mt-2">
 					Sudah punya akun? <Link to="/login"> <b> Masuk Sekarang. </b> </Link>

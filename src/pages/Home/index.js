@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-
+import { useHistory } from 'react-router-dom';
 import {SideNav, LayoutSidebar, Responsive, CardProduct, Pagination, InputText, Pill} from 'upkit';
 import BounceLoader from 'react-spinners/BounceLoader';
 
@@ -8,16 +8,17 @@ import { fetchProduct,setPage, goToNextPage, goToPrevPage, setKeyword, setCatego
 
 import menus from './menu';
 import tags  from './tags';
-
 import TopBar from '../../component/TopBar';
+import Cart from '../../component/Cart';
 
 import { config } from '../../config';
-
+import { addItem, removeItem } from '../../features/Cart/actions';
 
 function Home() {
 	let products = useSelector(state => state.products)
+	let cart = useSelector(state => state.cart)
 	let dispatch = useDispatch()
-
+	let history = useHistory()
 
 	React.useEffect(()=>{
 		dispatch(fetchProduct());
@@ -28,7 +29,12 @@ function Home() {
 			<LayoutSidebar
 				sidebarSize={80}
 				sidebar={
-					<SideNav items={menus} verticalAlign="top" active={products.category} onChange={category => dispatch(setCategory(category))}/>
+					<SideNav
+						items={menus}
+						verticalAlign="top"
+						active={products.category}
+						onChange={category => dispatch(setCategory(category))}
+					/>
 				}
 				content={
 					<div className="md:flex md:flex-row-reverse w-full h-full min-h-screen mr-5 ">
@@ -49,18 +55,17 @@ function Home() {
 
 								<div className="mb-5 pl-2 flex w-3/3 overflow-auto pb-5">
 									{tags[products.category].map((tag, index) => {
-									return <div key={index}>
-												<Pill
-													text={tag}
-													icon={tag.slice(0,1).toUpperCase()}
-													isActive={products.tags.includes(tag)}
-													onClick={_ => dispatch(toggleTag(tag))}
-												/>
-											</div>
+										return <div key={index}>
+													<Pill
+														text={tag}
+														icon={tag.slice(0,1).toUpperCase()}
+														isActive={products.tags.includes(tag)}
+														onClick={_ => dispatch(toggleTag(tag))}
+													/>
+												</div>
 										}
 									)}
 								</div>
-
 
 								{products.status === 'process' && !products.data.length ?
 									<div className="flex justify-center items-center">
@@ -76,7 +81,7 @@ function Home() {
 													title={product.name}
 													imgUrl={`${config.api_host}/upload/${product.image_url}`}
 													price={product.price}
-													onAddToCart={_ => null}
+													onAddToCart={_ => dispatch(addItem(product))}
 												/>
 											</div>
 										)
@@ -95,7 +100,10 @@ function Home() {
 								</div>
 							</div>
 						</div>
-						<div className="md:w-1/4 w-full h-full shadow-lg border-r border-white bg-gray-100"> Keranjang</div>
+
+						<div className="md:w-1/4 w-full h-full shadow-lg border-r border-white bg-gray-100">
+							<Cart items={cart} onItemInc={item => dispatch(addItem(item))} onItemDec={item => dispatch(removeItem(item))}  onCheckOut={_ => history.push("/checkout")}/>
+						 </div>
 					</div>
 				}
 			/>

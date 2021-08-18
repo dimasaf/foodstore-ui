@@ -1,5 +1,4 @@
 // berfungsi menyumpan ke localstorage
-
 import store from "./store";
 import { saveCart } from '../api/cart';
 
@@ -28,12 +27,10 @@ function listener(){
 
 		saveCart(token, currentCart);
 	}
-
 }
 
 function listen(){
 	store.subscribe(listener)
 }
-
 
 export {listen}
