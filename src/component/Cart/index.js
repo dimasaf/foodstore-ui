@@ -20,7 +20,7 @@ function Cart({items, onItemInc, onItemDec, onCheckOut}) {
 				</div>
 			</div>
 			<Text as='h5'>
-				Total:{formatRupiah(total)}
+			Total:{formatRupiah(total)}
 			</Text>
 			<Button
 				text="Checkout"
