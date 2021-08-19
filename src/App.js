@@ -6,14 +6,13 @@ import store from './app/store';
 import { listen } from './app/listener';
 import { getCart } from './api/cart';
 
-
 import Home from './pages/Home';
 import Register from './pages/Register';
 import RegisterSuccess from './pages/RegisterSuccess';
 import Login from './pages/Login';
 
 import 'upkit/dist/style.min.css';
-
+import UserAddressAdd from './pages/UserAddressAdd';
 
 function App() {
 
@@ -29,6 +28,7 @@ function App() {
           <Route path="/register/berhasil" component={RegisterSuccess}></Route>
           <Route path="/register" component={Register}></Route>
           <Route path="/login" component={Login}></Route>
+          <Route path="/alamat-pengiriman/tambah" component={UserAddressAdd}></Route>
           <Route path="/" component={Home}></Route>
         </Switch>
       </Router>
