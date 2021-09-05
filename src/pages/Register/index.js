@@ -9,6 +9,7 @@ import { registerUser } from '../../api/auth'
 import {rules} from './validation'
 
 import StoreLogo from '../../component/StoreLogo';
+import TopBar from '../../component/TopBar';
 
 const statuslist ={
 	idle: 'idle',
@@ -37,39 +38,65 @@ function Register() {
 		// tidak dijalankan ketika fungsi diatas gagal, (karna return)
 		let {data} = await registerUser(formData)
 		if(data.error){
-			let fields = Object.keys(data.field)
+			let fields = Object.keys(data.fields);
 
 			fields.forEach(field => {
-				setError(field, {type: 'server', message:data.field[fields]?.properties?.message})
+				setError(field, {type: 'server', message:data.fields[field]?.properties?.message})
 			})
 		setStatus(statuslist.error);
-		return;
 		}
-	setStatus(statuslist.success)
-
-	history.push('/register/berhasil');
+		setStatus(statuslist.success)
+		history.push('/register/berhasil');
 	}
 
 	return (
 		<LayoutOne size="small">
+			<TopBar/>
+			<br />
 			<Card color="white">
 				<div className="text-center mb-5">
 					<StoreLogo/>
 				</div>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<FormControl errorMessage={errors.full_name?.message}>
-						<InputText name="full_name" placeholder="Nama Lengkap" fitContainer {...register("full_name", rules.full_name )}/>
+						<InputText
+							fitContainer
+							name="full_name"
+							placeholder="Nama Lengkap"
+							{...register("full_name", rules.full_name )}
+						/>
 					</FormControl>
 					<FormControl errorMessage={errors.email?.message}>
-						<InputText name="email" placeholder="Email" fitContainer {...register("email", rules.email)}/>
+						<InputText
+							fitContainer
+							name="email"
+							placeholder="Email"
+							{...register("email", rules.email)}
+						/>
 					</FormControl>
 					<FormControl errorMessage={errors.password?.message}>
-						<InputPassword name="password" placeholder="Password" fitContainer {...register("password", rules.password)}/>
+						<InputPassword
+							fitContainer
+							name="password"
+							placeholder="Password"
+							{...register("password", rules.password)}
+						/>
 					</FormControl>
 					<FormControl errorMessage={errors.password_confirmation?.message}>
-						<InputPassword name="password_confirmation" placeholder="Konfirmasi Password" fitContainer {...register("password_confirmation", rules.password_confirmation)}/>
+						<InputPassword
+							fitContainer
+							name="password_confirmation"
+							placeholder="Konfirmasi Password"
+							{...register("password_confirmation", rules.password_confirmation)}
+						/>
 					</FormControl>
-					<Button size="large" fitContainer disabled={status === statuslist.process}> {status === statuslist.process ? "Prosses" : "Mendaftar"}</Button>
+					<Button
+						fitContainer
+						size="large"
+						disabled={status === statuslist.process}
+					>
+						{status === statuslist.process ? "Prosses" : "Mendaftar"}
+					</Button>
 				</form>
 				<div className="text-center mt-2">
 					Sudah punya akun? <Link to="/login"> <b> Masuk Sekarang. </b> </Link>

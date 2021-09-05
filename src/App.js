@@ -10,12 +10,20 @@ import Home from './pages/Home';
 import Register from './pages/Register';
 import RegisterSuccess from './pages/RegisterSuccess';
 import Login from './pages/Login';
+import UserAddressAdd from './pages/UserAddressAdd';
+import UserAddress from './pages/UserAddress';
+import Checkout from './pages/Checkout';
+import Invoice from './pages/Invoice';
+import UserAccount from './pages/UserAccount'
+import UserOrders from './pages/UserOrders'
+import Logout from './pages/Logout';
 
 import 'upkit/dist/style.min.css';
-import UserAddressAdd from './pages/UserAddressAdd';
+
+import {GuardRoute} from './component/GuardRoute';
+import GuestOnlyRoute from './component/GuestOnlyRoute';
 
 function App() {
-
   React.useEffect(()=>{
     listen();
     getCart();
@@ -25,11 +33,39 @@ function App() {
     <Provider store={store}>
       <Router>
         <Switch>
-          <Route path="/register/berhasil" component={RegisterSuccess}></Route>
-          <Route path="/register" component={Register}></Route>
-          <Route path="/login" component={Login}></Route>
-          <Route path="/alamat-pengiriman/tambah" component={UserAddressAdd}></Route>
-          <Route path="/" component={Home}></Route>
+          <GuestOnlyRoute path="/register/berhasil">
+            <RegisterSuccess/>
+          </GuestOnlyRoute>
+          <GuestOnlyRoute path="/register" >
+            <Register/>
+          </GuestOnlyRoute>
+          <GuestOnlyRoute path="/login">
+            <Login/>
+          </GuestOnlyRoute>
+          <GuardRoute path="/logout">
+            <Logout/>
+          </GuardRoute>
+          <GuardRoute path="/alamat-pengiriman/tambah" >
+            <UserAddressAdd/>
+          </GuardRoute>
+          <GuardRoute path="/alamat-pengiriman">
+            <UserAddress/>
+          </GuardRoute>
+          <GuardRoute path="/pesanan">
+              <UserOrders/>
+          </GuardRoute>
+          <GuardRoute path="/account" >
+              <UserAccount/>
+          </GuardRoute>
+          <GuardRoute path="/checkout">
+              <Checkout/>
+          </GuardRoute>
+          <GuardRoute path="/invoice/:order_id">
+              <Invoice/>
+          </GuardRoute>
+          <Route path="/">
+            <Home/>
+          </Route>
         </Switch>
       </Router>
     </Provider>

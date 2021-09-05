@@ -13,18 +13,16 @@ function listener(){
 	currentCart = store.getState().cart;
 
 	let { token } = currentAuth;
-
+	// console.log(token)
 	// cek apakah nilai state `auth` berubah dari nilai sebelumnya
 	if(currentAuth !== previusAuth){
 		// jika berubah simpan ke local storage
 		localStorage.setItem('auth', JSON.stringify(currentAuth))
-
 		saveCart(token, currentCart);
 	}
 
 	if(currentCart !== previousCart){
 		localStorage.setItem('cart', JSON.stringify(currentCart));
-
 		saveCart(token, currentCart);
 	}
 }

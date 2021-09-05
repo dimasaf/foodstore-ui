@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react';
 import { getAddress } from '../api/delivery-address'
 
 const statuslist = {

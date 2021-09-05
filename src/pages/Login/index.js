@@ -8,6 +8,7 @@ import {userLogin} from '../../features/Auth/actions';
 import {login} from '../../api/auth';
 
 import StoreLogo from '../../component/StoreLogo'
+import TopBar from '../../component/TopBar'
 import {rules} from './validation'
 
 const statuslist = {
@@ -41,6 +42,7 @@ function Login() {
 
 	return (
 		<LayoutOne size="small">
+			<TopBar></TopBar>
 			<br />
 			<Card color="white">
 				<div className="text-center mb-5">

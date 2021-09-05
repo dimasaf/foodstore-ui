@@ -6,8 +6,8 @@ import BounceLoader from 'react-spinners/BounceLoader';
 
 import { fetchProduct,setPage, goToNextPage, goToPrevPage, setKeyword, setCategory, toggleTag} from '../../features/Products/actions';
 
-import menus from './menu';
-import tags  from './tags';
+import menus from './menus';
+import {tags}  from './tags';
 import TopBar from '../../component/TopBar';
 import Cart from '../../component/Cart';
 
@@ -22,7 +22,9 @@ function Home() {
 
 	React.useEffect(()=>{
 		dispatch(fetchProduct());
-	},[dispatch,products.currentPage, products.setKeyword, products.category, products.tags])
+	},[dispatch,products.currentPage, products.keyword, products.category, products.tags])
+
+	console.log(products)
 
 	return (
 		<div>
@@ -33,7 +35,8 @@ function Home() {
 						items={menus}
 						verticalAlign="top"
 						active={products.category}
-						onChange={category => dispatch(setCategory(category))}
+						onChange={category => {dispatch(setCategory(category))
+						}}
 					/>
 				}
 				content={

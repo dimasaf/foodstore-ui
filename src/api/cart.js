@@ -3,13 +3,14 @@ import store from "../app/store";
 import { config } from "../config";
 import { setItems } from "../features/Cart/actions";
 
-export async function saveCart({token, cart}){
+export async function saveCart(token, cart){
 	return await axios.put(`${config.api_host}/api/carts`, {items: cart}, {
 		headers:{
-			authorization: `Bearer ${token}`
+			authorization:`Bearer ${token}`
 		}
 	})
 }
+
 
 export async function getCart(){
 	let { token } = localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth')) : {}
